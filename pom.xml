@@ -19,6 +19,18 @@
 	</properties>
 	<dependencies>
     <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.6.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
       <version>${spring.boot.version}</version>
@@ -51,13 +63,46 @@
     </dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+  <profiles>
+    <profile>
+      <id>failsafe</id>
+      <build>
+          <plugins>
+              <plugin>
+                  <artifactId>maven-failsafe-plugin</artifactId>
+                  <version>2.22.0</version>
+                  <executions>
+                      <execution>
+                          <goals>
+                              <goal>integration-test</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+              </plugin>
+          </plugins>
+      </build>
+    </profile>
+  </profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+      </plugin>
+    </plugins>
+    <resources>     
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>                      
+                <include>**/*.properties</include>                  
+            </includes>
+        </resource>            
+    </resources>
 	</build>
 
 </project>
