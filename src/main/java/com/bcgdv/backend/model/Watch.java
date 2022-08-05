@@ -22,7 +22,10 @@ public class Watch {
   private Discount discount;
 
   public Watch(Long id, @NotNull(message = "Name is required.") String name, @NotNull(message = "Price is required.") Double price, Discount discount) {
-
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.discount = discount;
   }
  
   public Watch(Long id, @NotNull(message = "Name is required.") String name, @NotNull(message = "Price is required.") Double price) {

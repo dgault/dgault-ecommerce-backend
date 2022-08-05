@@ -24,12 +24,20 @@ public class Order {
 
   private String status;
 
+  @OneToMany(mappedBy = "pk.order")
   @Valid
   private List<WatchOrder> watchOrders = new ArrayList<>();
 
   @Transient
   public Double getTotalOrderPrice() {
-    return 0D;
+    double sum = 0D;
+    List<WatchOrder> watchOrders = getWatchOrders();
+    if (watchOrders == null) return sum;
+    for (WatchOrder op : watchOrders) {
+      sum += op.getTotalPrice();
+    }
+    if (sum < 0) throw new IllegalArgumentException("Total price cannot be negative");
+    return sum;
   }
 
   public Long getId() {
@@ -66,6 +74,7 @@ public class Order {
 
   @Transient
   public int getNumberOfWatcheOrders() {
+    if (watchOrders == null) return 0;
     return this.watchOrders.size();
   }
 }
