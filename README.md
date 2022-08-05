@@ -12,8 +12,8 @@ For the persistence aspect of the backend I have used an in-memory H2 database w
 *	Java
 *	Spring Boot
 *	Spring-data-jpa
-*       Maven
-*       H2 database
+*	Maven
+*	H2 database
 
 ## Installation
 
@@ -91,7 +91,7 @@ For the persistence aspect of the backend I have used an in-memory H2 database w
 
 ### 2. Watch-Api
 
-	**GET** ``` /api/watches/ ```
+  **GET** ``` /api/watches/ ```
   
   Returns a list of the watches currently stored. The return values should look as below:
   ```
